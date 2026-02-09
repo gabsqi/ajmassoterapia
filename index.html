@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ana Júlia Massoterapia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sacramento&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+                    <path d="M16 8v16M8 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <p class="logo">Ana Júlia Massoterapia</p>
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item"><a href="#">Home</a></li>
+                <li class="menu-item"><a href="#">Agendamento</a></li>
+                <li class="menu-item"><a href="#">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="login-container">
+        <div class="login-box">
+            <h2 class="login-title">
+                Agende seu atendimento de forma rápida e prática
+            </h2>
+
+            <form class="login-form" id="agendamento-form">
+                <label for="nome" class="input-label">Nome completo:</label>
+                <input id="nome" class="input-field" type="text" placeholder="Digite aqui seu nome" required>
+
+                <label class="input-label">Escolha uma data:</label>
+                <div class="calendar-wrapper">
+                    <div class="calendar-header">
+                        <button type="button" class="calendar-nav" id="prev-month">❮</button>
+                        <h3 id="calendar-month-year"></h3>
+                        <button type="button" class="calendar-nav" id="next-month">❯</button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+                <input id="data-selecionada" type="hidden" required>
+
+                <label for="horario" class="input-label">Escolha um horário:</label>
+                <select id="horario" class="input-field" required>
+                    <option value="">Horários</option>
+                </select>
+
+                <button type="submit" class="btn-login" id="btn-agendar">
+                    Enviar no WhatsApp
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer-container">
+        <p class="footer-text">© 2026 GRS Todos os direitos reservados</p>
+    </footer>
+</body>
+
+</html>

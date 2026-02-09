@@ -143,7 +143,7 @@ form.addEventListener('submit', (e) => {
     const dataFormatada = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
 
     // Criar mensagem para WhatsApp
-    const mensagem = `Olá Ana Júlia! Meu nome é ${nome} e gostaria de agendar um atendimento de massoterapia para ${dataFormatada} às ${horario}. A data está disponível?`;
+    const mensagem = `Olá Ana Júlia! Meu nome é ${nome} e gostaria de agendar um atendimento de massagem para ${dataFormatada} às ${horario}. A data está disponível?`;
 
     // Encodar mensagem para URL
     const mensagemEncodada = encodeURIComponent(mensagem);
@@ -157,4 +157,5 @@ form.addEventListener('submit', (e) => {
 
 // Renderizar calendário ao carregar a página
 renderCalendar();
+
 

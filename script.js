@@ -149,7 +149,7 @@ form.addEventListener('submit', (e) => {
     const mensagemEncodada = encodeURIComponent(mensagem);
 
     // Número do WhatsApp da Ana Júlia (com código do país e DDD)
-    const numeroWhatsApp = '5551998912119';
+    const numeroWhatsApp = '5551992977979';
 
     // Redirecionar para WhatsApp
     window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagemEncodada}`, '_blank');
@@ -157,3 +157,4 @@ form.addEventListener('submit', (e) => {
 
 // Renderizar calendário ao carregar a página
 renderCalendar();
+

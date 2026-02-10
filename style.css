@@ -1,3 +1,12 @@
+:root {
+  --color-primary: #988e7e;
+  --color-white: #ffffff;
+  --text-dark: #333333;
+
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+
 /* ----RESET------ */
 * {
   margin: 0;
@@ -9,6 +18,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+
 
 /* -------BODY------ */
 body {
@@ -49,6 +60,8 @@ body::before {
   outline: 2px solid #988e7e;
   outline-offset: 3px;
 }
+
+
 
 
 /* ---------- NAVBAR ---------- */
@@ -92,16 +105,46 @@ body::before {
   }
 }
 
+
+
+
+
+/* ---------- LOGO PREMIUM (FIX FINAL) ---------- */
+
 .logo {
-  font-family: "Sacramento", cursive;
-  font-size: 2.1rem;
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;               /* controle REAL do espaço */
+}
+
+.logo-name {
+  display: inline-block;  
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 1px;
   color: #ffffff;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.1);
-  letter-spacing: 2px;
-  margin: 0;
+  position: relative;
+  padding-bottom: 4px;    
+  line-height: 1.2;
+}
+
+.logo-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 2px;
+  background-color: #dfd0ba;
+}
+
+.logo-tagline {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #f2ede4;
+  line-height: 1.1;
 }
 
 .menu {
@@ -349,15 +392,7 @@ select.input-field {
   justify-content: center;
 }
 
-.about-container {
-  max-width: 720px;
-  background-color: var(--color-white);
-  padding: 2.5rem 2rem;
-  border-radius: 20px;
-  box-shadow: var(--shadow-medium);
-  text-align: center;
-  z-index: 1;
-}
+
 
 .about-title {
   font-family: "Sacramento", cursive;
@@ -376,11 +411,19 @@ select.input-field {
 /* ---------- SOBRE COM FOTO ---------- */
 
 .about-container {
+  max-width: 720px;
+  background-color: var(--color-white);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+  text-align: center;
+  z-index: 1;
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 2rem;
   align-items: center;
 }
+
 
 .about-photo {
   width: 100%;
@@ -399,7 +442,7 @@ select.input-field {
 }
 
 .about-photo img:hover {
-  transform: scale(1.05);
+  transform: scale(1.15);
   filter: grayscale(0%);
 }
 
@@ -422,25 +465,35 @@ select.input-field {
 @media (max-width: 768px) {
 
   body {
-    background-attachment: fixed;
+    background-attachment: scroll;
   }
 
 
   .navbar {
-    flex-direction: column;
     gap: 10px;
     padding: 16px;
     text-align: center;
   }
 
+@media (max-width: 768px) {
+  .logo-container {
+    flex-direction: column;
+  }
+}
   .menu {
     justify-content: center;
     gap: 16px;
   }
 
-  .logo {
-    font-size: 1.8rem;
+   .logo-name {
+    font-size: 1.2rem;
   }
+
+  .logo-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+  }
+
 
 
 
@@ -498,3 +551,4 @@ select.input-field {
 
 
 }
+

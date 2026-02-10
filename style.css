@@ -17,9 +17,35 @@ body {
   /* centraliza a imagem */
   background-attachment: fixed;
   /* imagem presa ao rolar */
-  height: 100vh;
+  min-height: 100vh;
   /* força altura total da imagem */
+  position: relative;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 251, 241, 0.3);
+  backdrop-filter: blur(1px);
+  z-index: 0;
+}
+
+.main-header,
+.login-container,
+.footer-container {
+  position: relative;
+  z-index: 1;
+}
+
+
+.menu a:focus-visible,
+.btn-login:focus-visible,
+.input-field:focus-visible {
+  outline: 2px solid #988e7e;
+  outline-offset: 3px;
+}
+
 
 /* ---------- NAVBAR ---------- */
 
@@ -27,9 +53,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 19px 40px;
-  background-color: #988e7ea4;
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+  padding: 10px 30px;
+  background-color: #988e7ee0;
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
 .logo-container {
@@ -37,7 +63,7 @@ body {
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.6s ease;
 }
 
 .logo-container:hover {
@@ -72,7 +98,6 @@ body {
     0 4px 8px rgba(0, 0, 0, 0.1);
   letter-spacing: 2px;
   margin: 0;
-  text-transform: ;
 }
 
 .menu {
@@ -82,25 +107,37 @@ body {
 }
 
 .menu a {
+  position: relative;
   text-decoration: none;
   color: #fff;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
   font-size: 0.85rem;
 }
 
-.menu a:hover {
-  border-bottom: 3px solid #fffbf1;
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #dfd0ba;
+  transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+  width: 100%;
 }
 
 /* ---------- LOGIN ---------- */
 
 .login-container {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  padding: 20px;
+  padding: 2rem 1rem;
 }
 
 .login-box {
@@ -111,6 +148,7 @@ body {
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
 }
 
 .login-title {
@@ -118,6 +156,7 @@ body {
   font-weight: 600;
   margin-bottom: 10px;
 }
+
 
 /* ---------- FORM ---------- */
 
@@ -139,15 +178,16 @@ body {
 }
 
 .input-field {
-  width: 200px;
-  height: 32px;
-  padding: 6px;
-  border-radius: 6px;
+  width: 100%;
+  max-width: 260px;
+  height: 36px;
+  padding: 8px;
+  border-radius: 8px;
   border: none;
   background-color: #dbcab0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .input-field:focus {
@@ -165,6 +205,7 @@ select.input-field {
   background-position: right 8px center;
   padding-right: 28px;
 }
+
 
 /* ---------- CALENDÁRIO ---------- */
 
@@ -304,7 +345,14 @@ select.input-field {
 
 
 
+/* ---------- MOBILE ---------- */
+
 @media (max-width: 768px) {
+
+  body {
+    background-attachment: fixed;
+  }
+
 
   .navbar {
     flex-direction: column;
@@ -321,9 +369,23 @@ select.input-field {
   .logo {
     font-size: 1.8rem;
   }
-}
 
-@media (max-width: 768px) {
+
+
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .login-box {
+    width: 100%;
+    max-width: 420px;
+    padding: 1.5rem 1.2rem;
+    border-radius: 12px;
+  }
+
 
   .input-field {
     width: 100%;
@@ -338,8 +400,14 @@ select.input-field {
     width: 100%;
     max-width: 260px;
   }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+
 }
-
-
-
-

@@ -6,6 +6,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* -------BODY------ */
 body {
   background-image: url('https://i.postimg.cc/HLk2DVJy/Chat-GPT-Image-10-de-fev-de-2026-10-58-15.png');
@@ -334,6 +338,74 @@ select.input-field {
 
 
 
+
+
+
+/* ---------- SOBRE ---------- */
+
+.about-section {
+  padding: 4rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.about-container {
+  max-width: 720px;
+  background-color: var(--color-white);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+  text-align: center;
+  z-index: 1;
+}
+
+.about-title {
+  font-family: "Sacramento", cursive;
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+}
+
+.about-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+/* ---------- SOBRE COM FOTO ---------- */
+
+.about-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-photo {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(10%);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.about-photo img:hover {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+
+
+
 /* ---------- FOOTER ---------- */
 
 .footer-container {
@@ -407,6 +479,21 @@ select.input-field {
 
   p {
     font-size: 0.9rem;
+  }
+
+
+  .about-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-photo {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .about-title {
+    font-size: 2rem;
   }
 
 

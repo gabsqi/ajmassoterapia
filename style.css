@@ -64,47 +64,41 @@ body::before {
 
 
 
-/* ---------- NAVBAR ---------- */
+/* ---------- NAVBAR GLASS PREMIUM ---------- */
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 
 .navbar {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 14px 32px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px;
-  background-color: #988e7ee0;
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  transition: transform 0.6s ease;
+.navbar:hover {
+  transform: translateY(-2px);
 }
-
-.logo-container:hover {
-  transform: scale(1.05);
-}
-
-.logo-icon {
-  color: #ffffff;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
-}
-
 
 
 
@@ -114,18 +108,20 @@ body::before {
 .logo {
   display: flex;
   flex-direction: column;
-  gap: 2px;               /* controle REAL do espaço */
+  gap: 2px;
+  /* controle REAL do espaço */
 }
 
 .logo-name {
-  display: inline-block;  
+  display: inline-block;
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #ffffff;
+  color: #2e2e2e;
   position: relative;
-  padding-bottom: 4px;    
+  padding-bottom: 4px;
   line-height: 1.2;
+
 }
 
 .logo-name::after {
@@ -136,6 +132,13 @@ body::before {
   width: 36px;
   height: 2px;
   background-color: #dfd0ba;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.logo-container:hover .logo-name::after {
+  transform: scaleX(1.3);
 }
 
 .logo-tagline {
@@ -143,7 +146,7 @@ body::before {
   font-weight: 400;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #f2ede4;
+  color: #5c5c5c;
   line-height: 1.1;
 }
 
@@ -151,15 +154,23 @@ body::before {
   display: flex;
   gap: 24px;
   list-style: none;
+
 }
 
 .menu a {
   position: relative;
   text-decoration: none;
-  color: #fff;
   font-weight: 400;
   text-transform: uppercase;
   font-size: 0.85rem;
+  transition: opacity 0.3s ease;
+  color: #2e2e2e;
+
+
+}
+
+.menu a:hover {
+  opacity: 0.8;
 }
 
 .menu a::after {
@@ -167,15 +178,19 @@ body::before {
   position: absolute;
   left: 0;
   bottom: -4px;
-  width: 0;
+  width: 100%;
   height: 2px;
   background-color: #dfd0ba;
-  transition: width 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
 }
 
 .menu a:hover::after {
-  width: 100%;
+  transform: scaleX(1);
 }
+
+
 
 /* ---------- LOGIN ---------- */
 
@@ -195,7 +210,16 @@ body::before {
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
 
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .login-title {
@@ -235,13 +259,19 @@ body::before {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   font-weight: 500;
   font-size: 0.95rem;
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
+
 
 .input-field:focus {
   outline: none;
   background-color: #ffffff;
   transition: 0.3s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
 }
 
 select.input-field {
@@ -254,6 +284,7 @@ select.input-field {
 }
 
 
+
 /* ---------- CALENDÁRIO ---------- */
 
 .calendar-wrapper {
@@ -263,7 +294,7 @@ select.input-field {
   padding: 12px;
   margin-top: 8px;
   margin-bottom: 8px;
-  max-width: 280px;
+  max-width: 100%;
 }
 
 .calendar-header {
@@ -274,7 +305,7 @@ select.input-field {
 }
 
 .calendar-header h3 {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #988e7e;
   margin: 0;
@@ -299,23 +330,23 @@ select.input-field {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+  gap: 6px;
 }
 
 .calendar-day-header {
   text-align: center;
   font-weight: 600;
-  font-size: 0.7rem;
-  padding: 4px 0;
+  font-size: 0.85rem; /* maior */
+  padding: 6px 0;
   color: #988e7e;
 }
 
 .calendar-day {
-  padding: 6px 4px;
+  padding: 10px 0; /* aumenta altura */
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1rem; /* 🔥 aumenta número */
   background-color: #f5f5f5;
   transition: 0.2s;
   font-weight: 500;
@@ -364,21 +395,62 @@ select.input-field {
       #988e7e 30%,
       #fffbf1 100%);
   background-size: 200% auto;
-  transition: 1s;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   font-size: 0.85rem;
+  transition:
+    background-position 0.8s ease,
+    box-shadow 0.3s ease,
+    transform 0.15s ease;
+    
+
+      position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-login:hover {
   background-position: right center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
 }
 
 .btn-login:active {
-  transform: scale(0.98);
+  transform: translateY(0);
 }
 
+
+
+.btn-loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid #000;
+  border-radius: 50%;
+  display: none;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-login.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-login.loading .btn-loader {
+  display: inline-block;
+}
+
+.btn-login.loading .btn-text {
+  opacity: 0.7;
+}
 
 
 
@@ -412,10 +484,8 @@ select.input-field {
 
 .about-container {
   max-width: 720px;
-  background-color: var(--color-white);
   padding: 2.5rem 2rem;
   border-radius: 20px;
-  box-shadow: var(--shadow-medium);
   text-align: center;
   z-index: 1;
   display: grid;
@@ -438,7 +508,8 @@ select.input-field {
   object-fit: cover;
   display: block;
   filter: grayscale(10%);
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: transform 0.6s ease, filter 0.6s ease;
+
 }
 
 .about-photo img:hover {
@@ -458,6 +529,54 @@ select.input-field {
   background-color: #ffffffb0;
 }
 
+/* ---------- BOTÃO VOLTAR AO TOPO ---------- */
+
+#backToTop {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+
+  width: 46px;
+  height: 46px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(152, 142, 126, 0.85);
+  backdrop-filter: blur(14px);
+
+  color: #ffffff;
+
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+
+  cursor: pointer;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+
+  transition: all 0.3s ease;
+
+  z-index: 999;
+
+  display: none;
+}
+
+
+
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#backToTop:hover {
+  transform: translateY(-4px);
+}
+
 
 
 /* ---------- MOBILE ---------- */
@@ -468,33 +587,44 @@ select.input-field {
     background-attachment: scroll;
   }
 
-
   .navbar {
-    gap: 10px;
-    padding: 16px;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+    margin: 15px;
+  }
+
+
+
+  .logo-container {
     text-align: center;
   }
 
-@media (max-width: 768px) {
-  .logo-container {
-    flex-direction: column;
-  }
-}
+
   .menu {
+    width: 100%;
     justify-content: center;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 14px;
   }
 
-   .logo-name {
-    font-size: 1.2rem;
+  .menu a {
+    font-size: 0.75rem;
+  }
+
+  .logo-name {
+    font-size: 1.1rem;
+    color: #2e2e2e;
+
   }
 
   .logo-tagline {
-    font-size: 0.65rem;
-    letter-spacing: 1.5px;
+    font-size: 0.6rem;
+    letter-spacing: 1.2px;
+    color: #5c5c5c;
+
+
   }
-
-
 
 
   .login-container {
@@ -505,8 +635,7 @@ select.input-field {
   }
 
   .login-box {
-    width: 100%;
-    max-width: 420px;
+    max-width: 360PX;
     padding: 1.5rem 1.2rem;
     border-radius: 12px;
   }
@@ -526,15 +655,6 @@ select.input-field {
     max-width: 260px;
   }
 
-  h1 {
-    font-size: 1.4rem;
-  }
-
-  p {
-    font-size: 0.9rem;
-  }
-
-
   .about-container {
     grid-template-columns: 1fr;
     text-align: center;
@@ -545,10 +665,25 @@ select.input-field {
     margin: 0 auto;
   }
 
-  .about-title {
-    font-size: 2rem;
+
+  #backToTop {
+    display: flex;
   }
 
+  #backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 
 }
+
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 

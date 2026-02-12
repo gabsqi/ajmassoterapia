@@ -74,7 +74,7 @@ body::before {
 
 .navbar {
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 20px 10px;
   padding: 14px 32px;
 
   display: flex;
@@ -165,8 +165,6 @@ body::before {
   font-size: 0.85rem;
   transition: opacity 0.3s ease;
   color: #2e2e2e;
-
-
 }
 
 .menu a:hover {
@@ -209,10 +207,12 @@ body::before {
   border-radius: 16px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  animation: fadeUp 0.8s ease forwards;
+  box-shadow: var(--shadow-medium);
+  animation: fadeUp 1s ease forwards;
   opacity: 0;
   transform: translateY(20px);
+  
+  
 }
 
 @keyframes fadeUp {
@@ -240,12 +240,13 @@ body::before {
   padding: 15px;
   border-radius: 12px;
   border: 1px solid #988e7e;
+  
 }
 
 .input-label {
   margin-top: 20px;
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
 }
 
 .input-field {
@@ -258,7 +259,7 @@ body::before {
   background-color: #dbcab0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.90rem;
   transition:
     box-shadow 0.3s ease,
     background-color 0.3s ease,
@@ -271,7 +272,7 @@ body::before {
   background-color: #ffffff;
   transition: 0.3s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 select.input-field {
@@ -336,25 +337,27 @@ select.input-field {
 .calendar-day-header {
   text-align: center;
   font-weight: 600;
-  font-size: 0.85rem; /* maior */
+  font-size: 0.85rem;
   padding: 6px 0;
   color: #988e7e;
 }
 
 .calendar-day {
-  padding: 10px 0; /* aumenta altura */
+  padding: 10px 0;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem; /* 🔥 aumenta número */
+  font-size: 1rem;
   background-color: #f5f5f5;
   transition: 0.2s;
   font-weight: 500;
+  min-width: 0;
+
 }
 
 .calendar-day:hover:not(.disabled) {
   background-color: #dbd4c9;
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
 .calendar-day.selected {
@@ -382,7 +385,7 @@ select.input-field {
 /* ---------- BOTÃO ---------- */
 
 .btn-login {
-  margin: 20px 0 10px 0;
+  margin: 30px;
   padding: 10px 32px;
   border: none;
   border-radius: 28px 10px;
@@ -397,14 +400,14 @@ select.input-field {
   background-size: 200% auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1rem;
   transition:
     background-position 0.8s ease,
     box-shadow 0.3s ease,
     transform 0.15s ease;
-    
 
-      position: relative;
+
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -529,6 +532,9 @@ select.input-field {
   background-color: #ffffffb0;
 }
 
+
+
+
 /* ---------- BOTÃO VOLTAR AO TOPO ---------- */
 
 #backToTop {
@@ -583,87 +589,18 @@ select.input-field {
 
 @media (max-width: 768px) {
 
-  body {
-    background-attachment: scroll;
-  }
+
 
   .navbar {
     flex-direction: column;
-    gap: 18px;
-    padding: 20px;
-    margin: 15px;
+    gap: 24px;
   }
-
-
-
-  .logo-container {
-    text-align: center;
-  }
-
-
-  .menu {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  .menu a {
-    font-size: 0.75rem;
-  }
-
-  .logo-name {
-    font-size: 1.1rem;
-    color: #2e2e2e;
-
-  }
-
-  .logo-tagline {
-    font-size: 0.6rem;
-    letter-spacing: 1.2px;
-    color: #5c5c5c;
-
-
-  }
-
-
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-  }
-
-  .login-box {
-    max-width: 360PX;
-    padding: 1.5rem 1.2rem;
-    border-radius: 12px;
-  }
-
-
-  .input-field {
-    width: 100%;
-    max-width: 260px;
-  }
-
-  .calendar-wrapper {
-    max-width: 100%;
-  }
-
-  .btn-login {
-    width: 100%;
-    max-width: 260px;
-  }
+ 
 
   .about-container {
     grid-template-columns: 1fr;
-    text-align: center;
   }
 
-  .about-photo {
-    max-width: 260px;
-    margin: 0 auto;
-  }
 
 
   #backToTop {
@@ -685,5 +622,3 @@ select.input-field {
     transition: none !important;
   }
 }
-
-

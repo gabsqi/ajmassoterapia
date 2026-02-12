@@ -29,14 +29,14 @@
 
       <ul class="menu">
         <li class="menu-item"><a href="#"></a></li>
-        <li class="menu-item"><a href="#titulo">Agendamento</a></li>
+        <li class="menu-item"><a href="#boxx">Agendamento</a></li>
         <li class="menu-item"><a href="#sobre">Sobre a profissional</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="login-container">
-    <div class="login-box">
+    <div class="login-box" id="boxx">
       <h2 id="titulo" class="login-title">
         Agende seu momento de bem-estar
       </h2>
@@ -62,8 +62,9 @@
         </select>
 
         <button type="submit" class="btn-login" id="btn-agendar">
-                    Enviar no WhatsApp
-        </button>
+  <span class="btn-text">Enviar no WhatsApp</span>
+  <span class="btn-loader"></span>
+</button>
       </form>
     </div>
   </main>
@@ -83,7 +84,7 @@
         <h2 class="about-title">Sobre a profissional</h2>
 
         <p class="about-text">
-          Sou Ana Júlia Ludvig, massoterapeuta formada e apaixonada por cuidar do bem-estar físico e mental.
+          Sou Ana Júlia, massoterapeuta formada e apaixonada por cuidar do bem-estar físico e mental.
           Atuo com técnicas de massoterapia focadas em aliviar dores, reduzir o estresse e melhorar
           a qualidade de vida de cada cliente, sempre com atendimento humanizado e individualizado.
         </p>
@@ -101,6 +102,20 @@
   <footer class="footer-container">
     <p class="footer-text">© 2026 GRS Todos os direitos reservados</p>
   </footer>
+
+
+<button id="backToTop" aria-label="Voltar ao topo">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M12 5L6 11M12 5L18 11"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </svg>
+</button>
+
+
 </body>
 
 

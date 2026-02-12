@@ -483,6 +483,10 @@ select.input-field {
   margin-bottom: 1rem;
 }
 
+.agenda{
+  text-decoration: none;
+}
+
 /* ---------- SOBRE COM FOTO ---------- */
 
 .about-container {
@@ -622,3 +626,4 @@ select.input-field {
     transition: none !important;
   }
 }
+

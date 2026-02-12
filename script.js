@@ -1,4 +1,8 @@
-// Funcionalidade do Calendário
+/* =====================================================
+   1️⃣ VARIÁVEIS GLOBAIS
+   Controlam estado do calendário e elementos do DOM
+===================================================== */
+
 let currentDate = new Date();
 let dataSelecionada = null;
 
@@ -9,153 +13,253 @@ const nextMonthBtn = document.getElementById('next-month');
 const inputDataSelecionada = document.getElementById('data-selecionada');
 const selectHorario = document.getElementById('horario');
 const form = document.getElementById('agendamento-form');
+const backToTopButton = document.getElementById("backToTop");
 
-// Nomes dos meses em português
-const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-// Horários disponíveis por dia da semana
-// 0 = Domingo (fechado), 1-5 = Segunda a Sexta, 6 = Sábado
-const horariosDisponivels = {
-    'weekday': ['19:00', '20:00', '21:00'], // Segunda a Sexta (19h a 21h, intervalo de 1h)
-    'saturday': ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'] // Sábado (8h a 21h, intervalo de 1h)
+/* =====================================================
+   2️⃣ CONFIGURAÇÕES FIXAS
+===================================================== */
+
+// Meses do ano
+const meses = [
+  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+];
+
+// Horários disponíveis
+const horariosDisponiveis = {
+  weekday: ['19:00', '20:00', '21:00'],
+  saturday: [
+    '08:00', '09:00', '10:00', '11:00', '12:00',
+    '13:00', '14:00', '15:00', '16:00', '17:00',
+    '18:00', '19:00', '20:00', '21:00'
+  ]
 };
 
-// Renderizar o calendário
+
+/* =====================================================
+   3️⃣ FUNÇÃO: renderCalendar()
+   - Desenha o calendário na tela
+   - Desabilita datas passadas e domingos
+===================================================== */
+
 function renderCalendar() {
-    // Limpar grid anterior
-    calendarGrid.innerHTML = '';
 
-    // Atualizar header com mês e ano
-    calendarMonthYear.textContent = `${meses[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+  calendarGrid.innerHTML = '';
 
-    // Criar headers dos dias da semana
-    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
-    diasSemana.forEach(dia => {
-        const dayHeader = document.createElement('div');
-        dayHeader.className = 'calendar-day-header';
-        dayHeader.textContent = dia;
-        calendarGrid.appendChild(dayHeader);
-    });
+  calendarMonthYear.textContent =
+    `${meses[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
 
-    // Obter primeiro dia do mês e quantidade de dias
-    const primeirodia = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-    const diasNoMes = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-    const hoje = new Date();
+  const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
 
-    // Adicionar dias vazios antes do primeiro dia
-    for (let i = 0; i < primeirodia; i++) {
-        const dayEmpty = document.createElement('div');
-        dayEmpty.className = 'calendar-day empty';
-        calendarGrid.appendChild(dayEmpty);
+  diasSemana.forEach(dia => {
+    const header = document.createElement('div');
+    header.className = 'calendar-day-header';
+    header.textContent = dia;
+    calendarGrid.appendChild(header);
+  });
+
+  const primeiroDia = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  ).getDay();
+
+  const diasNoMes = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0
+  ).getDate();
+
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+
+  for (let i = 0; i < primeiroDia; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'calendar-day empty';
+    calendarGrid.appendChild(empty);
+  }
+
+  for (let dia = 1; dia <= diasNoMes; dia++) {
+
+    const botaoDia = document.createElement('button');
+    botaoDia.type = 'button';
+    botaoDia.className = 'calendar-day';
+    botaoDia.textContent = dia;
+
+    const dataAtual = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      dia
+    );
+
+    const diaSemana = dataAtual.getDay();
+
+    if (dataAtual < hoje || diaSemana === 0) {
+      botaoDia.disabled = true;
+      botaoDia.classList.add('disabled');
+    } else {
+      botaoDia.addEventListener('click', () => {
+        selecionarData(dia);
+      });
     }
 
-    // Adicionar dias do mês
-    for (let dia = 1; dia <= diasNoMes; dia++) {
-        const dayBtn = document.createElement('button');
-        dayBtn.type = 'button';
-        dayBtn.className = 'calendar-day';
-        dayBtn.textContent = dia;
-
-        const dataAtual = new Date(currentDate.getFullYear(), currentDate.getMonth(), dia);
-        const diaSemana = dataAtual.getDay();
-
-        // Desabilitar datas passadas e domingos
-        if (dataAtual < new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()) || diaSemana === 0) {
-            dayBtn.disabled = true;
-            dayBtn.className += ' disabled';
-        } else {
-            dayBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                selecionarData(dia);
-            });
-        }
-
-        // Destacar data selecionada
-        if (dataSelecionada && 
-            dataSelecionada.getDate() === dia &&
-            dataSelecionada.getMonth() === currentDate.getMonth() &&
-            dataSelecionada.getFullYear() === currentDate.getFullYear()) {
-            dayBtn.className += ' selected';
-        }
-
-        calendarGrid.appendChild(dayBtn);
+    if (
+      dataSelecionada &&
+      dataSelecionada.getDate() === dia &&
+      dataSelecionada.getMonth() === currentDate.getMonth() &&
+      dataSelecionada.getFullYear() === currentDate.getFullYear()
+    ) {
+      botaoDia.classList.add('selected');
     }
+
+    calendarGrid.appendChild(botaoDia);
+  }
 }
 
-// Selecionar data
+
+/* =====================================================
+   4️⃣ FUNÇÃO: selecionarData()
+   - Salva a data escolhida
+   - Atualiza campo hidden
+   - Atualiza horários
+===================================================== */
+
 function selecionarData(dia) {
-    dataSelecionada = new Date(currentDate.getFullYear(), currentDate.getMonth(), dia);
-    inputDataSelecionada.value = dataSelecionada.toISOString().split('T')[0];
-    renderCalendar();
-    atualizarHorarios();
+
+  dataSelecionada = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    dia
+  );
+
+  inputDataSelecionada.value =
+    dataSelecionada.toISOString().split('T')[0];
+
+  renderCalendar();
+  atualizarHorarios();
 }
 
-// Atualizar horários disponíveis baseado no dia da semana
+
+/* =====================================================
+   5️⃣ FUNÇÃO: atualizarHorarios()
+   - Mostra horários conforme dia escolhido
+===================================================== */
+
 function atualizarHorarios() {
-    selectHorario.innerHTML = '<option value="">Escolha um horário</option>';
-    
-    if (!dataSelecionada) {
-        return;
-    }
 
-    // Verificar qual dia da semana foi selecionado
-    const diaSemana = dataSelecionada.getDay();
-    const horarios = diaSemana === 6 ? horariosDisponivels.saturday : horariosDisponivels.weekday;
+  selectHorario.innerHTML =
+    '<option value="">Escolha um horário</option>';
 
-    // Adicionar horários disponíveis ao select
-    horarios.forEach(horario => {
-        const option = document.createElement('option');
-        option.value = horario;
-        option.textContent = horario;
-        selectHorario.appendChild(option);
-    });
+  if (!dataSelecionada) return;
+
+  const diaSemana = dataSelecionada.getDay();
+
+  const horarios =
+    diaSemana === 6
+      ? horariosDisponiveis.saturday
+      : horariosDisponiveis.weekday;
+
+  horarios.forEach(horario => {
+    const option = document.createElement('option');
+    option.value = horario;
+    option.textContent = horario;
+    selectHorario.appendChild(option);
+  });
 }
 
-// Navegação entre meses
+
+/* =====================================================
+   6️⃣ NAVEGAÇÃO ENTRE MESES
+===================================================== */
+
 prevMonthBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  const hoje = new Date();
+
+  if (
+    currentDate.getFullYear() > hoje.getFullYear() ||
+    currentDate.getMonth() > hoje.getMonth()
+  ) {
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar();
+  }
 });
 
 nextMonthBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
+  e.preventDefault();
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
 });
 
-// Enviar para WhatsApp
+
+/* =====================================================
+   7️⃣ ENVIO PARA WHATSAPP
+   - Valida campos
+   - Formata data
+   - Abre WhatsApp
+===================================================== */
+
 form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const nome = document.getElementById('nome').value;
-    const data = document.getElementById('data-selecionada').value;
-    const horario = document.getElementById('horario').value;
+  const nome = document.getElementById('nome').value.trim();
+  const data = inputDataSelecionada.value;
+  const horario = selectHorario.value;
 
-    if (!nome || !data || !horario) {
-        alert('Por favor, preencha todos os campos!');
-        return;
-    }
+  if (!nome || !data || !horario) {
+    alert('Por favor, preencha todos os campos!');
+    return;
+  }
 
-    // Formatar data para formato brasileiro
-    const dataParts = data.split('-');
-    const dataFormatada = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
+  const [ano, mes, dia] = data.split('-');
+  const dataFormatada = `${dia}/${mes}/${ano}`;
 
-    // Criar mensagem para WhatsApp
-    const mensagem = `Olá Ana Júlia! Meu nome é ${nome} e gostaria de agendar um atendimento de massagem para ${dataFormatada} às ${horario}. A data está disponível?`;
+  const mensagem =
+    `Olá Ana Júlia! Meu nome é ${nome} e gostaria de agendar um atendimento de massagem para ${dataFormatada} às ${horario}. A data está disponível?`;
 
-    // Encodar mensagem para URL
-    const mensagemEncodada = encodeURIComponent(mensagem);
+  const mensagemEncodada = encodeURIComponent(mensagem);
 
-    // Número do WhatsApp da Ana Júlia (com código do país e DDD)
-    const numeroWhatsApp = '5551992977979';
+  const numeroWhatsApp = '5551992977979';
 
-    // Redirecionar para WhatsApp
-    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagemEncodada}`, '_blank');
+  window.open(
+    `https://wa.me/${numeroWhatsApp}?text=${mensagemEncodada}`,
+    '_blank'
+  );
 });
 
-// Renderizar calendário ao carregar a página
+
+/* =====================================================
+   8️⃣ BOTÃO VOLTAR AO TOPO (SOMENTE MOBILE)
+===================================================== */
+
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
+window.addEventListener("scroll", () => {
+
+  if (!isMobile()) return;
+
+  if (window.scrollY > 300) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+
+});
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+
+/* =====================================================
+   9️⃣ INICIALIZAÇÃO
+===================================================== */
+
 renderCalendar();
-
-

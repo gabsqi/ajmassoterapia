@@ -1,9 +1,14 @@
 :root {
   --color-primary: #988e7e;
+  --color-primary-light: #dbcab0;
+  --color-accent: #dfd0ba;
   --color-white: #ffffff;
-  --text-dark: #333333;
+  --color-dark: #2e2e2e;
+  --color-text: #333333;
 
   --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --radius-md: 16px;
+  --radius-lg: 20px;
 }
 
 
@@ -12,7 +17,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
 html {
@@ -25,16 +29,12 @@ html {
 body {
   background-image: url('https://i.postimg.cc/HLk2DVJy/Chat-GPT-Image-10-de-fev-de-2026-10-58-15.png');
   background-repeat: no-repeat;
-  /* evitar a repetição */
   background-size: cover;
-  /* imagem cobre  a tela */
   background-position: center;
-  /* centraliza a imagem */
   background-attachment: fixed;
-  /* imagem presa ao rolar */
   min-height: 100vh;
-  /* força altura total da imagem */
   position: relative;
+  font-family: "Poppins", sans-serif;
 }
 
 body::before {
@@ -64,7 +64,7 @@ body::before {
 
 
 
-/* ---------- NAVBAR GLASS PREMIUM ---------- */
+/* ---------- NAVBAR GLASS ---------- */
 
 .main-header {
   position: sticky;
@@ -82,7 +82,7 @@ body::before {
   align-items: center;
 
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(18px);
 
   border-radius: 20px;
@@ -103,7 +103,7 @@ body::before {
 
 
 
-/* ---------- LOGO PREMIUM (FIX FINAL) ---------- */
+/* ---------- LOGO   ---------- */
 
 .logo {
   display: flex;
@@ -167,6 +167,11 @@ body::before {
   color: #2e2e2e;
 }
 
+.agenda {
+  text-decoration: none;
+
+}
+
 .menu a:hover {
   opacity: 0.8;
 }
@@ -190,7 +195,7 @@ body::before {
 
 
 
-/* ---------- LOGIN ---------- */
+/* ---------- LOGIN QUE VIROU CALENDÁRIO ---------- */
 
 .login-container {
   min-height: 100vh;
@@ -211,8 +216,8 @@ body::before {
   animation: fadeUp 1s ease forwards;
   opacity: 0;
   transform: translateY(20px);
-  
-  
+
+
 }
 
 @keyframes fadeUp {
@@ -240,7 +245,7 @@ body::before {
   padding: 15px;
   border-radius: 12px;
   border: 1px solid #988e7e;
-  
+
 }
 
 .input-label {
@@ -382,7 +387,7 @@ select.input-field {
 
 
 
-/* ---------- BOTÃO ---------- */
+/* ---------- BOTÃO DE ENVIAR ---------- */
 
 .btn-login {
   margin: 30px;
@@ -392,7 +397,7 @@ select.input-field {
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
-  color: #000;
+  color: #1f1f1f;
   background-image: linear-gradient(to right,
       #dbd4b4 0%,
       #988e7e 30%,
@@ -459,7 +464,7 @@ select.input-field {
 
 
 
-/* ---------- SOBRE ---------- */
+/* ---------- SEÇÃO SOBRE ---------- */
 
 .about-section {
   padding: 4rem 1.5rem;
@@ -481,10 +486,6 @@ select.input-field {
   line-height: 1.7;
   color: var(--text-dark);
   margin-bottom: 1rem;
-}
-
-.agenda{
-  text-decoration: none;
 }
 
 /* ---------- SOBRE COM FOTO ---------- */
@@ -539,7 +540,7 @@ select.input-field {
 
 
 
-/* ---------- BOTÃO VOLTAR AO TOPO ---------- */
+/* ---------- BOTÃO de VOLTAR AO TOPO ---------- */
 
 #backToTop {
   position: fixed;
@@ -589,17 +590,20 @@ select.input-field {
 
 
 
+
 /* ---------- MOBILE ---------- */
 
 @media (max-width: 768px) {
 
-
+body {
+    background-attachment: scroll;
+  }
 
   .navbar {
     flex-direction: column;
     gap: 24px;
   }
- 
+
 
   .about-container {
     grid-template-columns: 1fr;
@@ -626,4 +630,3 @@ select.input-field {
     transition: none !important;
   }
 }
-

@@ -28,26 +28,10 @@ Para manter o projeto leve, rápido e de fácil manutenção, utilizei tecnologi
 
 ---
 
-## 🚀 Como Executar Localmente
-
-Se quiser clonar o projeto para estudar ou testar na sua máquina, siga os passos abaixo:
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com
-   ```
-2. Acesse a pasta do projeto:
-   ```bash
-   cd ajmassoterapia
-   ```
-3. Abra o arquivo `index.html` diretamente no seu navegador ou utilize a extensão **Live Server** no VS Code.
-
----
-
 ## ✒️ Autor
 
 Desenvolvido por **Gabriel** 👋 
 Se quiser trocar uma ideia sobre desenvolvimento web, design ou UX, conecte-se comigo:
 
-- 👔 **[LinkedIn](https://linkedin.com)** <!-- substitua com seu link real -->
-- 🌐 **[Meu Portfólio GitHub](https://github.com)**
+- 👔 **[LinkedIn](https://www.linkedin.com/in/-gabrielramos/)** 
+- 🌐 **[Meu Portfólio GitHub](https://github.com/gabsqi)**
